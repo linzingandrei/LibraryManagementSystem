@@ -227,7 +227,7 @@ namespace LibraryManagementSystem.view
 
             string? title = Console.ReadLine();
 
-            if (title == null || title != "")
+            if (title == null || title == "")
             {
                 Console.WriteLine("Issue in input!");
                 goto issue_in_title_for_add;

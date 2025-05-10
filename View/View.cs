@@ -508,6 +508,9 @@ namespace LibraryManagementSystem.view
                     goto issue;
                 }
 
+                if (!int.TryParse(searchOption_, out int value))
+                    goto issue;
+
                 int searchOption = int.Parse(searchOption_);
                 
                 StringBuilder inputBuffer = new StringBuilder();
@@ -550,21 +553,22 @@ namespace LibraryManagementSystem.view
 
                                 string searchString = inputBuffer.ToString();
 
+                                bool ok = true;
+
                                 if (!string.IsNullOrEmpty(searchString))
                                 {
                                     if (searchOption == 4)
                                     {
-                                    error_not_number:
-                                        foreach (char c in searchString)
+                                        if (!int.TryParse(searchString, out var id))
                                         {
-                                            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' && c != '6' && c != '7' && c != '8' && c != 9)
-                                            {
-                                                Console.WriteLine("Not a valid number!");
-                                                goto error_not_number;
-                                            }
+                                            Console.WriteLine("Not a valid number!");
+                                            ok = false;
                                         }
                                     }
-                                    List<Book>? books = service.searchBook(searchString, searchOption);
+                                    List<Book>? books = new List<Book>();
+
+                                    if (ok == true)
+                                         books = service.searchBook(searchString, searchOption);
 
                                     if (books != null && books.Count > 0)
                                     {

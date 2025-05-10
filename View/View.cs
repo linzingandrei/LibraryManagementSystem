@@ -299,14 +299,21 @@ namespace LibraryManagementSystem.view
 
         void updateBook()
         {
-            Console.WriteLine("Enter the id of the book you want to be updated:");
-            Console.Write(">");
+            id_issue:
+                Console.WriteLine("Enter the id of the book you want to be updated:");
+                Console.Write(">");
 
             string? idInput = Console.ReadLine();
 
             if (idInput == null)
             {
                 Console.WriteLine("The id cannot be null!");
+                goto id_issue;
+            }
+            else if (!Guid.TryParse(idInput, out var id))
+            {
+                Console.WriteLine("Not a valid guid!");
+                goto id_issue;
             }
 
             Console.WriteLine("Enter new title(press enter if you don't want it changed):");
@@ -378,20 +385,27 @@ namespace LibraryManagementSystem.view
             }
             else
             {
-                Console.WriteLine("There was an issue updating your book");
+                Console.WriteLine("There was an issue updating your book (book may be out of existence)");
             }
         }
 
         void deleteBook()
         {
-            Console.WriteLine("Enter the id of the book you want to be deleted:");
-            Console.Write(">");
+            id_issue:
+                Console.WriteLine("Enter the id of the book you want to be deleted:");
+                Console.Write(">");
 
             string? idInputForDeletion = Console.ReadLine();
 
             if (idInputForDeletion == null)
             {
                 Console.WriteLine("The id cannot be null!");
+                goto id_issue;
+            }
+            if (!Guid.TryParse(idInputForDeletion, out var id))
+            {
+                Console.WriteLine("The id is not a valid guid!");
+                goto id_issue;
             }
             else
             {

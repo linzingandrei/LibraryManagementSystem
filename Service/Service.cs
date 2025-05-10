@@ -134,6 +134,15 @@ namespace LibraryManagementSystem.Service
             return 1;
         }
 
+        /*
+         * Returns an int which means the following things:
+         *          0: error
+         *          1: complete success
+         *          other numbers: the amount of books that could be returned. there is a +1 for a corner case, later, in view, after printed,
+         *          it is substracted to reflect the real number.
+         *          
+         *          The lend functionality is similar
+         */
         public int returnBooks(Guid id, int amount)
         {
             Book? book = this.repository.getBookById(id);

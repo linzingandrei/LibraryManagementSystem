@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using LibraryManagementSystem.model;
 using LibraryManagementSystem.repository;
@@ -67,13 +68,13 @@ namespace LibraryManagementSystem.Service
             }
 
             string newAuthor = book.author;
-            if (author != book.author && author != "")
+            if (author != book.author && author != "" && !Regex.IsMatch(author, @"^\d+$"))
             {
                 newAuthor = author;
             }
 
             string newGenre = book.genre;
-            if (genre != book.genre && genre != "")
+            if (genre != book.genre && genre != "" && !Regex.IsMatch(genre, @"^\d+$"))
             {
                 newGenre = genre;
             }
@@ -147,6 +148,12 @@ namespace LibraryManagementSystem.Service
                 book.lentQuantity = 0;
                 this.repository.returnBooks(id, book.lentQuantity);
                 return Math.Abs(book.quantity - amount) + 1;
+            }
+
+            if (book.lentQuantity - amount < 0)
+            {
+                book.lentQuantity = 0;
+                return Math.Abs(amount - book.lentQuantity);
             }
 
             book.lentQuantity -= amount;

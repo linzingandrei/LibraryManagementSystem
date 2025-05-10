@@ -267,7 +267,7 @@ namespace LibraryManagementSystem.view
                         int quantity = -1;
                         string? quantity_input = Console.ReadLine();
 
-                        if (quantity_input == null || quantity_input == "" || quantity_input[0] == '-')
+                        if (quantity_input == null || quantity_input == "" || quantity_input[0] == '-' || quantity_input == "0")
                         {
                             Console.WriteLine("Issue in quantity (input not a valid number or negative)!");
                             goto issue_in_quantity_for_add;
@@ -343,7 +343,7 @@ namespace LibraryManagementSystem.view
             }
 
             Console.WriteLine("Change availability too?");
-            Console.WriteLine("y(yes) or n(no)");
+            Console.WriteLine("Enter y(yes) or n(no)");
 
             Console.Write(">");
             string? userInputForAvailability = Console.ReadLine();

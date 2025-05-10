@@ -207,7 +207,8 @@ namespace LibraryManagementSystem.view
                                 books[digitOfBookToAdd - 1].title,
                                 books[digitOfBookToAdd - 1].author,
                                 books[digitOfBookToAdd - 1].genre,
-                                userQuant
+                                userQuant,
+                                books[digitOfBookToAdd - 1].available
                             );
                         }
                     }

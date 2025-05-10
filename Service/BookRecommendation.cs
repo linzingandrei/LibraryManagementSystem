@@ -140,7 +140,8 @@ namespace LibraryManagementSystem.Service
                         author = book.Authors,
                         genre = "",
                         quantity = 0,
-                        lentQuantity = 0
+                        lentQuantity = 0,
+                        available = "false"
                     };
 
                     booksWithScores.Add((

@@ -46,6 +46,33 @@ namespace LibraryManagementSystem.repository
             }
         }
 
+        public int addBook(string title, string author, string genre, int quantity, string availability)
+        {
+            var book = new Book
+            {
+                id = Guid.NewGuid(),
+                title = title,
+                author = author,
+                genre = genre,
+                quantity = quantity,
+                lentQuantity = 0,
+                available = availability
+            };
+
+            try
+            {
+                this.appDbContext.Books.Add(book);
+                this.appDbContext.SaveChanges();
+
+                return 1;
+            }
+            catch (Exception exception)
+            {
+                Console.Error.WriteLine($"Failed to add book: {exception.Message}");
+                return 0;
+            }
+        }
+
         public Book? getBookById(Guid id)
         {
             return this.appDbContext.Books.Find(id);

@@ -34,6 +34,22 @@ namespace LibraryManagementSystem.Service
             return returnValue;
         }
 
+        public int addBook(string title, string author, string genre, int quantity, string availability)
+        {
+            List<Book>? books = this.repository.getBooks();
+
+            foreach (Book book in books)
+            {
+                if (book.title == title)
+                {
+                    return 0;
+                }
+            }
+
+            int returnValue = this.repository.addBook(title, author, genre, quantity, availability);
+            return returnValue;
+        }
+
         public Book? getBookById(Guid id)
         {
             Book? book = this.repository.getBookById(id);

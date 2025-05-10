@@ -124,7 +124,7 @@ namespace LibraryManagementSystem.Service
             {
                 book.lentQuantity = book.quantity;
                 this.repository.lendBooks(id, book.lentQuantity);
-                return Math.Abs(book.quantity - amount) + 1;
+                return Math.Abs(book.quantity - (book.lentQuantity + amount)) + 1;
             }
 
             book.lentQuantity += amount;

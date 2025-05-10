@@ -227,7 +227,7 @@ namespace LibraryManagementSystem.view
 
             string? title = Console.ReadLine();
 
-            if (title == null)
+            if (title == null || title != "")
             {
                 Console.WriteLine("Issue in input!");
                 goto issue_in_title_for_add;
@@ -240,7 +240,7 @@ namespace LibraryManagementSystem.view
 
                 string? author = Console.ReadLine();
 
-                if (author == null)
+                if (author == null || author == "")
                 {
                     Console.WriteLine("Issue in author!");
                     goto issue_in_author_for_add;
@@ -253,7 +253,7 @@ namespace LibraryManagementSystem.view
 
                     string? genre = Console.ReadLine();
 
-                    if (genre == null)
+                    if (genre == null || genre == "")
                     {
                         Console.WriteLine("Issue in genre!");
                         goto issue_in_genre_for_add;
@@ -267,9 +267,9 @@ namespace LibraryManagementSystem.view
                         int quantity = -1;
                         string? quantity_input = Console.ReadLine();
 
-                        if (quantity_input == null)
+                        if (quantity_input == null || quantity_input == "" || quantity_input[0] == '-')
                         {
-                            Console.WriteLine("Issue in quantity (input not a valid number)!");
+                            Console.WriteLine("Issue in quantity (input not a valid number or negative)!");
                             goto issue_in_quantity_for_add;
                         }
                         else if (!Regex.IsMatch(quantity_input, @"^\d+$"))

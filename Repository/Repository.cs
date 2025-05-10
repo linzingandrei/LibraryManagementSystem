@@ -145,11 +145,17 @@ namespace LibraryManagementSystem.repository
                     break;
 
                 case 5:
-                    column = "availability";
+                    column = "available";
                     break;
             }
 
-            var results = appDbContext.Books.Where($"{column}.Contains(@0)", chars).ToList();
+            var results = new List<Book>();
+
+            if (searchBy != 4)
+                results = appDbContext.Books.Where($"{column}.Contains(@0)", chars).ToList();
+            else
+                results = appDbContext.Books.Where($"{column} == @0", int.Parse(chars)).ToList();
+
             results.Sort((a, b) => a.title.CompareTo(b.title));
 
             return results;

@@ -420,14 +420,20 @@ namespace LibraryManagementSystem.view
 
         void getDetailsAboutABook()
         {
-            Console.WriteLine("Enter the id of the book you want to see:");
-            Console.Write(">");
+            not_valid_guid:
+                Console.WriteLine("Enter the id of the book you want to see:");
+                Console.Write(">");
 
             string? idInputForPrintingABook = Console.ReadLine();
 
             if (idInputForPrintingABook == null || idInputForPrintingABook == "")
             {
                 Console.WriteLine("The id cannot be null!");
+            }
+            else if (!Guid.TryParse(idInputForPrintingABook, out Guid result))
+            {
+                Console.WriteLine("Not a valid guid!");
+                goto not_valid_guid;
             }
             else
             {
@@ -532,6 +538,18 @@ namespace LibraryManagementSystem.view
 
                                 if (!string.IsNullOrEmpty(searchString))
                                 {
+                                    if (searchOption == 4)
+                                    {
+                                    error_not_number:
+                                        foreach (char c in searchString)
+                                        {
+                                            if (c != '0' && c != '1' && c != '2' && c != '3' && c != '4' && c != '5' && c != '6' && c != '7' && c != '8' && c != 9)
+                                            {
+                                                Console.WriteLine("Not a valid number!");
+                                                goto error_not_number;
+                                            }
+                                        }
+                                    }
                                     List<Book>? books = service.searchBook(searchString, searchOption);
 
                                     if (books != null && books.Count > 0)

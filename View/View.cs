@@ -650,13 +650,21 @@ namespace LibraryManagementSystem.view
                         break;
 
                     case "2":
-                        Console.WriteLine("Enter the id of the book to lend:");
-                        Console.Write(">");
+                        guid_issue_lend:
+                            Console.WriteLine("Enter the id of the book to lend:");
+                            Console.Write(">");
+
                         string? idForLend = Console.ReadLine();
 
                         if (idForLend == null || idForLend == "")
                         {
                             Console.WriteLine("Not a valid id!");
+                            goto guid_issue_lend;
+                        }
+                        else if (!Guid.TryParse(idForLend, out var id))
+                        {
+                            Console.WriteLine("Not a valid guid!");
+                            goto guid_issue_lend;
                         }
                         else
                         {
@@ -698,13 +706,21 @@ namespace LibraryManagementSystem.view
                         break;
 
                     case "3":
-                        Console.WriteLine("Enter the id of the book to return:");
-                        Console.Write(">");
+                        guid_issue_return:
+                            Console.WriteLine("Enter the id of the book to return:");
+                            Console.Write(">");
+
                         string? idForReturn = Console.ReadLine();
 
                         if (idForReturn == null || idForReturn == "")
                         {
                             Console.WriteLine("Not a valid id!");
+                            goto guid_issue_return;
+                        }
+                        else if (!Guid.TryParse(idForReturn, out var id))
+                        {
+                            Console.WriteLine("Not a valid guid!");
+                            goto guid_issue_return;
                         }
                         else
                         {

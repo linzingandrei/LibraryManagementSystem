@@ -174,10 +174,8 @@ namespace LibraryManagementSystem.Service
             }
             else if (words.Count <  weights.Count)
             {
-                for (int i = 0; i < words.Count; i++)
-                {
-                    weights.RemoveAt(weights.Count - i);
-                }
+                int removeCount = weights.Count - words.Count;
+                weights.RemoveRange(words.Count, removeCount);
             }
 
             var keywordsAndWeights = new Dictionary<string, float>();
